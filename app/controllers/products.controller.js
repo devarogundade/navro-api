@@ -7,7 +7,7 @@ exports.findAll = (req, res) => {
 
     const colors = req.query.colors ? req.query.colors.split(',') : null
     const categories = req.query.categories ? req.query.categories.split(',') : null
-    
+
     const query = {}
 
     if (colors) query.colors = { $in: colors }
@@ -15,10 +15,14 @@ exports.findAll = (req, res) => {
 
     Product.find(query)
         .then(data => {
-            res.send(data);
+            res.send({
+                status: "Ok",
+                data: data
+            });
         })
         .catch(err => {
             res.status(500).send({
+                status: "BAD",
                 message: err.message || "Some err occurred."
             });
         });
