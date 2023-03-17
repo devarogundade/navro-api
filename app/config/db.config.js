@@ -1,3 +1,3 @@
 module.exports = {
-    url: "MONGO_URL_HERE"
+    url: "mongodb+srv://navro:navro@navro.l6gs7oi.mongodb.net/?retryWrites=true&w=majority"
 };

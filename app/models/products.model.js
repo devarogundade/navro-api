@@ -11,9 +11,12 @@ module.exports = mongoose => {
         images: {
             type: Array
         },
-        category: {
+        categories: {
             type: Array,
             required: true
+        },
+        how_to_use: {
+            type: Array
         },
         colors: {
             type: Array,
