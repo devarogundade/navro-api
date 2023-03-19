@@ -29,6 +29,8 @@ db.mongoose
         process.exit()
     })
 
+
+
 app.get("/", (req, res) => {
     res.json({ message: "NAVRO API" })
 })

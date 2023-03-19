@@ -15,6 +15,10 @@ module.exports = mongoose => {
             type: Array,
             required: true
         },
+        types: {
+            type: Array,
+            required: true
+        },
         how_to_use: {
             type: Array
         },
@@ -30,6 +34,15 @@ module.exports = mongoose => {
         },
         brand: {
             type: String
+        },
+        acne: {
+            type: Boolean
+        },
+        blackhead: {
+            type: Boolean
+        },
+        skinspot: {
+            type: Boolean
         },
         url: {
             type: String,

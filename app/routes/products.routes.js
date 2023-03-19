@@ -5,5 +5,8 @@ module.exports = app => {
     // Retrieve all products
     router.get("/", product.findAll)
 
+    // Insert products
+    router.post("/", product.create)
+
     app.use("/products", router);
 };

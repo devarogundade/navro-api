@@ -14,7 +14,6 @@ async function scrape(PRODUCT_URL) {
     const priceElement = await page.waitForSelector(".ProductPricing .Text-ds--title-6")
     const sizeElement = await page.waitForSelector(".ProductVariant__info--dimension .ProductDimension .Text-ds:last-child")
     const summaryElement = await page.waitForSelector(".ProductSummary .Text-ds--subtitle-1")
-    const howtouseElement = await page.waitForSelector(".Markdown p")
 
     const category = await page.evaluate(element => element.textContent, categoryElement)
     const brand = await page.evaluate(element => element.textContent, brandElement)
@@ -22,9 +21,82 @@ async function scrape(PRODUCT_URL) {
     const price = await page.evaluate(element => element.textContent, priceElement)
     const size = await page.evaluate(element => element.textContent, sizeElement)
     const summary = await page.evaluate(element => element.textContent, summaryElement)
-    // const how_to_use = await page.evaluate(element => element.textContent, howtouseElement)
 
     browser.close()
+
+    const colors = [
+        '8B Porcelain Beige',
+        '8S Porcelain Sand',
+        '12B Fair Beige',
+        '12N Fair Neutral',
+        '12S Fair Sand',
+        '14H Fair Honey',
+        '15S Fair-Light Sand',
+        '16N Fair-Light Neutral',
+        '18B Fair-Light Beige',
+        '18H Fair-Light Honey',
+        '20B Light Beige',
+        '20S Light Sand',
+        '22N Light Neutral',
+        '22H Light Honey',
+        '22B Light Beige',
+        '27H Light-Medium Honey',
+        '27S Light-Medium Sand',
+        '27B Light-Medium Beige',
+        '29N Light-Medium Neutral',
+        '34S Medium Sand',
+        '35B Medium Beige',
+        '35H Medium Honey',
+        '35N Medium Neutral',
+        '35G Medium Golden',
+        '36S Medium-Tan Sand',
+        '37N Medium-Tan Neutral',
+        '37G Medium-Tan Golden',
+        '38N Medium-Tan Neutral',
+        '42G Tan Golden',
+        '42S Tan Sand',
+        '44H Tan Honey',
+        '44N Tan Neutral',
+        '45H Tan Honey',
+        '47H Tan-Deep Honey',
+        '47S Tan-Deep Sand',
+        '47N Tan-Deep Neutral',
+        '49G Tan-Deep Golden',
+        '51N Deep Neutral',
+        '53N Deep Neutral',
+        '53S Deep Sand',
+        '53H Deep Honey',
+        '53G Deep Golden',
+        '57N Rich Neutral',
+        '57S Rich Sand',
+        '57G Rich Golden',
+        '58H Rich Honey',
+        '59S Rich Sand',
+        '60N Mahogany',
+        '60G Mahogany Golden',
+        '61H Espresso'
+    ]
+
+    const images = [
+        '',
+        '',
+        '',
+        '',
+        '',
+        ''
+    ]
+
+    const skintypes = [
+        'dry skin',
+        'oily skin',
+        'mixed skin',
+        'normal skin'
+    ]
+
+    const how_to_use = [
+        '',
+        ''
+    ]
 
     const product = {
         name: name,
@@ -32,8 +104,10 @@ async function scrape(PRODUCT_URL) {
         categories: [category.toLowerCase()],
         price: price.replace('$', ''),
         size: size,
+        colors: colors,
+        types: skintypes,
         description: summary,
-        // how_to_use: how_to_use,
+        how_to_use: how_to_use,
         url: PRODUCT_URL
     }
 
