@@ -1,5 +1,6 @@
 const { product } = require("../models");
 const db = require("../models");
+const axios = require('axios')
 
 const Product = db.product;
 
@@ -47,8 +48,8 @@ exports.findAll = (req, res) => {
     const categories = req.query.categories ? req.query.categories.split(',') : null
     const types = req.query.types ? req.query.types.split(',') : null
     const acne = (req.query.acne && req.query.acne == 'true')
-    const skinspot = (req.query.skinspot && req.query.skinspot == 'true') 
-    const blackhead = (req.query.blackhead && req.query.blackhead == 'true') 
+    const skinspot = (req.query.skinspot && req.query.skinspot == 'true')
+    const blackhead = (req.query.blackhead && req.query.blackhead == 'true')
 
     const query = {}
 
@@ -91,3 +92,29 @@ exports.findOne = (req, res) => {
             });
         });
 };
+
+exports.readText = async (req, res) => {
+    const apiKey = 'acc_29c9efc104e1da6';
+    const apiSecret = '2c5cbd76dcf0587aaae3e3da19c4d351';
+
+    const IMAGE_URL = req.query.image_url
+
+    try {
+        const response = await axios.get(`https://api.imagga.com/v2/text?image_url=${IMAGE_URL}`, {
+            auth: {
+                username: apiKey,
+                password: apiSecret
+            }
+        })
+
+        res.send({
+            status: "Ok",
+            data: response.data
+        });
+    } catch (error) {
+        res.status(500).send({
+            status: "BAD",
+            message: error.message || "Some err occurred."
+        });
+    }
+}

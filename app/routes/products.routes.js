@@ -4,6 +4,9 @@ module.exports = app => {
 
     // Retrieve all products
     router.get("/", product.findAll)
+    
+    // Insert products
+    router.get("/readtext", product.readText)
 
     // Retrieve a product
     router.get("/:id", product.findOne)
