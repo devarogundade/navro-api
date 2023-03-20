@@ -46,13 +46,9 @@ exports.findAll = (req, res) => {
     const colors = req.query.colors ? req.query.colors.split(',') : null
     const categories = req.query.categories ? req.query.categories.split(',') : null
     const types = req.query.types ? req.query.types.split(',') : null
-
-    const infections = () => {
-        if (req.query.acne && req.query.acne == 'true') return true
-        else if (req.query.skinspot && req.query.skinspot == 'true') return true
-        else if (req.query.blackhead && req.query.blackhead == 'true') return true
-        else return false
-    }
+    const acne = (req.query.acne && req.query.acne == 'true')
+    const skinspot = (req.query.skinspot && req.query.skinspot == 'true') 
+    const blackhead = (req.query.blackhead && req.query.blackhead == 'true') 
 
     const query = {}
 
@@ -60,7 +56,7 @@ exports.findAll = (req, res) => {
     if (categories) query.categories = { $in: categories }
     if (types) query.types = { $in: types }
 
-    query.$or = [{ acne: infections() }, { skinspot: infections() }, { blackhead: infections() }]
+    query.$or = [{ acne: acne }, { skinspot: skinspot }, { blackhead: blackhead }]
 
     Product.find(query)
         .then(data => {
